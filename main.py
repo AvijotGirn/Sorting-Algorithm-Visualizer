@@ -1,5 +1,3 @@
-import math
-
 import pygame
 import random
 pygame.init()
@@ -58,7 +56,9 @@ class DrawInformation:
         pygame.display.update()
 
 
-def draw_list(draw_info, color_positions={}, clear_background=False):
+def draw_list(draw_info, color_positions=None, clear_background=False):
+    if color_positions is None:
+        color_positions = {}
     lst = draw_info.lst
 
     if clear_background:
