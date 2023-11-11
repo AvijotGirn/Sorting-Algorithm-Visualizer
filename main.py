@@ -10,12 +10,12 @@ class DrawInformation:
     WHITE = 255,255,255
     GREEN = 0,255,0
     RED = 255,0,0
-    BACKGROUND_COLOR = WHITE
+    BACKGROUND_COLOR = 155,171,184
 
-    GREYS = [
-        (128,128,128),
-        (160,160,160),
-        (192,192,192)
+    COLORS = [
+        (238,227,203),
+        (215,192,174),
+        (150,126,118)
     ]
 
     FONT = pygame.font.SysFont('Arial',30)
@@ -70,7 +70,7 @@ def draw_list(draw_info, color_positions={}, clear_background=False):
         x = draw_info.start_x + i * draw_info.block_width
         y = draw_info.height - (val - draw_info.min_val) * draw_info.block_height
 
-        color = draw_info.GREYS[i % 3]  # Cycle through GREYS[0], GREYS[1], and GREYS[2]
+        color = draw_info.COLORS[i % 3]  # Cycle through COLORS[0], COLORS[1], and COLORS[2]
 
         if i in color_positions:
             color = color_positions[i]
@@ -99,7 +99,7 @@ def bubble_sort(draw_info, ascending=True):
             num2 = lst[j+1]
             if (num1 > num2 and ascending) or (num1 < num2 and not ascending):
                 lst[j], lst[j+1] = lst[j+1], lst[j]
-                draw_list(draw_info, {j:draw_info.GREEN, j+1:draw_info.RED}, True)
+                draw_list(draw_info, {j:draw_info.RED, j+1:draw_info.BLACK}, True)
                 yield True    # Pauses the execution half way and picks up where it left off
                               # To account for user being able to use controls while this is running
 
@@ -122,7 +122,7 @@ def insertion_sort(draw_info, ascending=True):
             lst[i] = lst[i-1]
             i = i-1
             lst[i] = current
-            draw_list(draw_info, {i-1:draw_info.GREEN, i:draw_info.RED}, True)
+            draw_list(draw_info, {i-1:draw_info.RED, i:draw_info.BLACK}, True)
             yield True
     return lst
 
@@ -146,7 +146,7 @@ def main():
     ###################################################
 
     while run:
-        clock.tick(60)  #FPS. i.e. max number of times this loop runs per second
+        clock.tick(30)  #FPS. i.e. max number of times this loop runs per second
         if sorting:
             try:
                 next(sorting_algo_generator)
